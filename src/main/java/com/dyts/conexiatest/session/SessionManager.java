@@ -30,24 +30,26 @@ public class SessionManager {
     private static SessionFactory sessionFactory;
 
     public static SessionFactory getSessionFactory() {
-        if (sessionFactory == null) {
-            try {
-                // Create registry
-                registry = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
+        synchronized (SessionManager.class) {
+            if (sessionFactory == null) {
+                try {
+                    // Create registry
+                    registry = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
 
-                // Create MetadataSources
-                MetadataSources sources = new MetadataSources(registry);
+                    // Create MetadataSources
+                    MetadataSources sources = new MetadataSources(registry);
 
-                // Create Metadata
-                Metadata metadata = sources.getMetadataBuilder().build();
+                    // Create Metadata
+                    Metadata metadata = sources.getMetadataBuilder().build();
 
-                // Create SessionFactory
-                sessionFactory = metadata.getSessionFactoryBuilder().build();
+                    // Create SessionFactory
+                    sessionFactory = metadata.getSessionFactoryBuilder().build();
 
-            } catch (Exception e) {
-                Logger.getLogger(SessionManager.class.getName()).log(Level.SEVERE, String.format("Error al obtener session de base de datos %s", e));
-                if (registry != null) {
-                    StandardServiceRegistryBuilder.destroy(registry);
+                } catch (Exception e) {
+                    Logger.getLogger(SessionManager.class.getName()).log(Level.SEVERE, String.format("Error al obtener session de base de datos %s", e));
+                    if (registry != null) {
+                        StandardServiceRegistryBuilder.destroy(registry);
+                    }
                 }
             }
         }
