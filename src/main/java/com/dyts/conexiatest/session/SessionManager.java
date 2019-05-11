@@ -34,7 +34,7 @@ public class SessionManager {
             if (sessionFactory == null) {
                 try {
                     // Create registry
-                    registry = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
+                    registry = new StandardServiceRegistryBuilder().configure().build();
 
                     // Create MetadataSources
                     MetadataSources sources = new MetadataSources(registry);
