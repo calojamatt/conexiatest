@@ -57,10 +57,15 @@ CREATE TABLE conexiatest.plato (
   idPlato int(11) NOT NULL AUTO_INCREMENT,
   Nombre varchar(200) NOT NULL,
   importe float(15, 2) NOT NULL,
+  idCocinero int(11) DEFAULT NULL,
   PRIMARY KEY (idPlato)
 )
 ENGINE = INNODB,
 COMMENT = 'Almacena los datos de los platos que ofrece el restaurante';
+
+ALTER TABLE conexiatest.plato
+ADD CONSTRAINT FK_plato_cocinero FOREIGN KEY (idCocinero)
+REFERENCES conexiatest.cocinero (idCocinero) ON DELETE NO ACTION;
 
 --
 -- Create TABLE `conexiatest`.`factura`
@@ -100,8 +105,6 @@ CREATE TABLE conexiatest.detallefactura (
   PRIMARY KEY (idDetalleFactura)
 )
 ENGINE = INNODB,
-CHARACTER SET utf8,
-COLLATE utf8_general_ci,
 COMMENT = 'Almacena en detalle la informacion de lo registrado en la factura';
 
 ALTER TABLE conexiatest.detallefactura
@@ -111,3 +114,7 @@ REFERENCES conexiatest.cocinero (idCocinero) ON DELETE NO ACTION;
 ALTER TABLE conexiatest.detallefactura
 ADD CONSTRAINT FK_detallefactura_factura FOREIGN KEY (idFactura)
 REFERENCES conexiatest.factura (idFactura) ON DELETE NO ACTION;
+
+ALTER TABLE conexiatest.detallefactura
+ADD CONSTRAINT FK_detallefactura_plato FOREIGN KEY (idPlato)
+REFERENCES conexiatest.plato (idPlato) ON DELETE NO ACTION;

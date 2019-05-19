@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="../templates/template.xhtml">
+        <ui:define name="content">
+            <div class="col-12 mt-3">
+                <h4> Informe de Clientes</h4>
+            </div>
+            <div class="col-12 mt-3">
+                <div class="card">
+                    <h:form>
+                    <div class="card-header"><i class="fas fa-user-plus"></i> Facuracion de Clientes </div>
+                    <div class="card-body">
+
+                            <div class="form-row">
+                                <div class="form-inline">
+                                    <label for="valorFacturadoCliente">Valor Facturado Cliente </label>
+                                    <h:inputText value="#{infclientemb.valorFacturado}" class="form-control" id="valorFacturadoCliente" />
+                                    <h:commandLink class="btn btn-primary btn-sm" value="Buscar " action="#{infclientemb.filterClients}"><i class="fa fa-search"></i></h:commandLink>
+                                </div>
+                            </div>
+                        <h:outputText id="valorFacturacion" styleClass="text-danger" style="padding-top: 20px"
+                                      value="Facturacion igual a: #{infclientemb.valorFacturado}"></h:outputText>
+                        <!-- list -->
+                        <div class="col-12 mt-3">
+                            <h:dataTable value="#{infclientemb.clienteList}" var="icl"
+                                    styleClass="table table-striped table-sm"
+                                    headerClass="thead-dark"  id="informeClientesDataTable">
+                                <!-- column header --> <!-- row record -->
+                                <h:column><f:facet name="header">Nombre</f:facet>#{icl.nombre}</h:column>
+                                <h:column><f:facet name="header">Primer Apellido</f:facet>#{icl.apellido1}</h:column>
+                                <h:column><f:facet name="header">Segundo Apellido</f:facet>#{icl.apellido2}</h:column>
+                                <h:column><f:facet name="header">Total Facturado</f:facet>#{icl.totalFacturado}</h:column>
+                            </h:dataTable>
+                        </div>
+                        <h:outputText id="nodataFacturacion" styleClass="text-danger"
+                                      value="NO se encontraron datos con el criterio de busqueda" rendered="#{infclientemb.clienteList.size() == 0}"/>
+                    </div>
+                    <div class="card-footer">
+                        <h:commandLink  class="btn btn-primary btn-sm" value="Refrescar" action="#{infclientemb.postConstruct}"/>
+                    </div>
+                    </h:form>
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>

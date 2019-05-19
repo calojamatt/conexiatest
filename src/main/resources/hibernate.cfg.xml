@@ -1,29 +1,31 @@
-<?xml version='1.0' encoding='utf-8'?>
-<!DOCTYPE hibernate-configuration PUBLIC
-    "-//Hibernate/Hibernate Configuration DTD//EN"
-    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
-<hibernate-configuration>
-  <session-factory>
-    <property name="connection.url">jdbc:mysql://localhost:3306/conexiatest?zeroDateTimeBehavior=convertToNull</property>
-    <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="connection.username">conexiauser</property>
-    <property name="connection.password">C0nex1aT3st</property>
-    <!-- JDBC connection pool settings ... using built-in test pool -->
-    <property name="connection.pool_size">1</property>
-    <!-- Select our SQL dialect -->
-    <property name="dialect">org.hibernate.dialect.MySQL5Dialect</property>
-    <!-- Echo the SQL to stdout -->
-    <property name="show_sql">true</property>
-    <!-- Set the current session context -->
-    <property name="current_session_context_class">thread</property>
-    
-    <!-- mappings for annotated classes -->
-    <mapping class="com.dyts.conexiatest.entities.Cliente"/>
-    <mapping class="com.dyts.conexiatest.entities.Camarero"/>
-    <mapping class="com.dyts.conexiatest.entities.Cocinero"/>
-    <mapping class="com.dyts.conexiatest.entities.Mesa"/>
-    <mapping class="com.dyts.conexiatest.entities.Plato"/>
-    <mapping class="com.dyts.conexiatest.entities.Factura"/>
-    <mapping class="com.dyts.conexiatest.entities.Detallefactura"/>
-  </session-factory>
-</hibernate-configuration>
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Data Source Declaration -->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://localhost:3306/conexiatest" />
+        <property name="username" value="conexiauser" />
+        <property name="password" value="C0nex1aT3st" /> 
+    </bean>
+	
+    <!-- Session Factory Declaration -->
+    <bean id="sessionFactory"
+              class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.format_sql">true</prop>
+            </props>
+        </property>
+        <property name="packagesToScan" value="com.dyts.conexiatest.persistence.entities"/>
+    </bean>
+    <bean id="txManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+</beans>

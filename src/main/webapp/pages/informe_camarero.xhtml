@@ -7,28 +7,27 @@
     <ui:composition template="../templates/template.xhtml">
         <ui:define name="content">
             <div class="col-12 mt-3">
-                <h4> Gestion de Clientes</h4>
+                <h4> Informe de Camareros</h4>
             </div>
             <div class="col-12 mt-3">
                 <div class="card">
-                    <div class="card-header"><i class="fas fa-user-plus"></i> Lista de Clientes</div>
+                    <div class="card-header"><i class="fas fa-user-plus"></i> Facuracion Mensual de Camareros</div>
                     <div class="card-body">
                         <!-- list -->
                         <div class="col-12 mt-3">
-                            <h:dataTable value="#{clientesmb.clientList}" var="cli"
+                            <h:dataTable value="#{infcamareromb.camareroDTOList}" var="ica"
                                     styleClass="table table-striped table-sm"
-                                    headerClass="thead-dark"  id="clientesDataTable">
+                                    headerClass="thead-dark"  id="informeCamarerosDataTable">
                                 <!-- column header --> <!-- row record -->
-                                <h:column><f:facet name="header">Id Cliente</f:facet>#{cli.idCliente}</h:column>
-                                <h:column><f:facet name="header">Nombres</f:facet>#{cli.nombre}</h:column>
-                                <h:column><f:facet name="header">Primer Apellido</f:facet>#{cli.apellido1}</h:column>
-                                <h:column><f:facet name="header">Segundo Apellido</f:facet>#{cli.apellido2}</h:column>
-                                <h:column><f:facet name="header">Observaciones</f:facet>#{cli.observaciones}</h:column>
+                                <h:column><f:facet name="header">Nombre</f:facet>#{ica.nombre}</h:column>
+                                <h:column><f:facet name="header">Apellido</f:facet>#{ica.apellido}</h:column>
+                                <h:column><f:facet name="header">Mes</f:facet>#{ica.mes}</h:column>
+                                <h:column><f:facet name="header">Total Facturado</f:facet>#{ica.totalFacturado}</h:column>
                             </h:dataTable>
                         </div>
                     </div>
                     <div class="card-footer">
-                        <h:link outcome="nuevocliente" class="btn btn-info btn-sm" value="Nuevo Cliente"></h:link>
+                        <h:commandLink class="btn btn-primary btn-sm" value="Refrescar" action="#{infcamareromb.postConstruct}"/>
                     </div>
                 </div>
             </div>

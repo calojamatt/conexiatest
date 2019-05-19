@@ -5,8 +5,9 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <h:outputScript library="js" name="bootstrap.min.js" />
+        <h:outputScript library="js" name="jquery-3.4.1.min.js" />
         <h:outputScript library="js" name="all.js" />
+        <h:outputScript library="js" name="bootstrap.min.js" />
         <h:outputStylesheet library="css" name="bootstrap.min.css"/>
         <title><ui:insert name="title">Restaurante La Mejor Cocina</ui:insert></title>
     </h:head>
@@ -34,7 +35,7 @@
         <div class="container-fluid">
             <div class="row" style="min-height: 768px">
                 <!-- !.navbar menu -->
-                <div class="col-2 bg-dark border-right" style="max-width: 12%;">
+                <div class="col-2 bg-dark border-right" style="max-width: 15%;">
                     <h:form>
                         <ul class="nav flex-column nav-pills m-1">
                             <li class="nav-item">
@@ -56,10 +57,10 @@
                               <h:link outcome="facturas" class="nav-link"><i class="fas fa-chevron-right"></i> Facturas</h:link>
                             </li>
                             <li class="nav-item">
-                              <h:link outcome="informes" class="nav-link"><i class="fas fa-chevron-right"></i> Informe Camareros</h:link>
+                              <h:link outcome="informecamarero" class="nav-link"><i class="fas fa-chevron-right"></i> Informe Camareros</h:link>
                             </li>
                             <li class="nav-item">
-                              <h:link outcome="informes" class="nav-link"><i class="fas fa-chevron-right"></i> Informe Clientes</h:link>
+                              <h:link outcome="informeclientes" class="nav-link"><i class="fas fa-chevron-right"></i> Informe Clientes</h:link>
                             </li>
                         </ul>
                     </h:form>

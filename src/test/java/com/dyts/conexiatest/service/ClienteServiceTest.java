@@ -5,22 +5,30 @@
  */
 package com.dyts.conexiatest.service;
 
-import com.dyts.conexiatest.entities.Cliente;
+import com.dyts.conexiatest.bl.serviceimpl.ClienteService;
+import com.dyts.conexiatest.persistence.entities.Cliente;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
 import static org.junit.Assert.*;
 
 /**
  *
  * @author CarlosMatt
  */
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:WEB-INF/spring-config.xml"})
 public class ClienteServiceTest {
     
     Cliente t;
-    ClienteService service;
+    @Autowired
+    private ClienteService service;
     
     public ClienteServiceTest() {
     }
@@ -35,21 +43,19 @@ public class ClienteServiceTest {
     
     @Before
     public void setUp() {
+        t = new Cliente();
+        t.setNombre("Carlos Alberto");
+        t.setApellido1("Maturana");
+        t.setApellido2("Mulett");
+        t.setObservaciones("prueba de dao y serviceimpl");
     }
     
     @After
     public void tearDown() {
     }
     
-    @Test
+    //@Test
     public void testCreate() throws Exception {
-        t = new Cliente();
-        t.setNombre("Carlos Alberto");
-        t.setApellido1("Maturana");
-        t.setApellido2("Mulett");
-        t.setObservaciones("prueba de dao y service");
-        service = new ClienteService();
-        
         System.out.println("create");
         Object expResult = null;
         Object result = service.create(t);

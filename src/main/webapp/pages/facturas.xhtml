@@ -2,10 +2,46 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:composition template="../templates/template.xhtml">
         <ui:define name="content">
-            Facturas
+            <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        ...
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 mt-3">
+                <h4> Gestion de Facturacion</h4>
+            </div>
+            <div class="col-12 mt-3">
+                <h:form>
+                <div class="card">
+                    <div class="card-header"><i class="fas fa-user-plus"></i> Lista de Facturas</div>
+                    <div class="card-body">
+                        <!-- list -->
+                        <div class="col-12 mt-3">
+                            <h:dataTable value="#{facturasmb.facturaList}" var="fac"
+                                    styleClass="table table-striped table-sm"
+                                    headerClass="thead-dark"  id="facturasDataTable">
+                                <!-- column header --> <!-- row record -->
+                                <h:column><f:facet name="header">Cliente</f:facet>#{fac.idCliente.nombre} #{fac.idCliente.apellido1}</h:column>
+                                <h:column><f:facet name="header">Camarero</f:facet>#{fac.idCamarero.nombre} #{fac.idCamarero.apellido1}</h:column>
+                                <h:column><f:facet name="header">Mesa</f:facet>#{fac.idMesa.idMesa}</h:column>
+                                <h:column><f:facet name="header">Importe</f:facet>#{facturasmb.sumInvoiceImporte(fac.detallefacturaCollection)}</h:column>
+                            </h:dataTable>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <h:link outcome="nuevafactura" class="btn btn-info btn-sm" value="Nuevo Factura"></h:link>
+                        <span class="sr-only"></span>
+                        <h:commandLink action="#{facturasmb.updateDataTable}" class="btn btn-info btn-sm" value="Actualizar "><i class="fas fa-sync-alt"></i></h:commandLink>
+                    </div>
+                </div>
+                </h:form>
+            </div>
         </ui:define>
     </ui:composition>
 </html>

@@ -2,10 +2,35 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:composition template="../templates/template.xhtml">
         <ui:define name="content">
-            Cocineros
+            <div class="col-12 mt-3">
+                <h4> Gestion de Cocineros</h4>
+            </div>
+            <div class="col-12 mt-3">
+                <div class="card">
+                    <div class="card-header"><i class="fas fa-user-plus"></i> Lista de Cocineros</div>
+                    <div class="card-body">
+                        <!-- list -->
+                        <div class="col-12 mt-3">
+                            <h:dataTable value="#{cocineromb.cocineroList}" var="coc"
+                                    styleClass="table table-striped table-sm"
+                                    headerClass="thead-dark" id="cocineroDataTable">
+                                <!-- column header --> <!-- row record -->
+                                <h:column headerText="ID Cocinero"><f:facet name="header">Id Cocinero</f:facet>#{coc.idCocinero}</h:column>
+                                <h:column headerText="Nombres"><f:facet name="header">Nombres</f:facet>#{coc.nombre}</h:column>
+                                <h:column headerText="Pimer Apellido"><f:facet name="header">Primer Apellido</f:facet>#{coc.apellido1}</h:column>
+                                <h:column headerText="Segundo Apellido"><f:facet name="header">Segundo Apellido</f:facet>#{coc.apellido2}</h:column>
+                            </h:dataTable>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <h:link outcome="nuevococinero" class="btn btn-info btn-sm" value="Nuevo Cocinero"></h:link>
+                    </div>
+                </div>
+            </div>
         </ui:define>
     </ui:composition>
 </html>

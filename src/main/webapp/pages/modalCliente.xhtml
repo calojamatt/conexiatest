@@ -1,0 +1,35 @@
+<div class="modal fade" tabindex="-1" role="dialog" 
+    aria-labelledby="modalCliente" aria-hidden="true" 
+    id="modalCliente">
+   <div class="modal-dialog modal-xl">
+       <div class="modal-content">
+           <div class="modal-header">
+               <h5 class="modal-title" id="modalClienteTitle">Lista Clientes</h5>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                   <span aria-hidden="true">&times;</span>
+               </button>
+           </div>
+           <div class="modal-body">
+               <div class="col-12 mt-3">
+                   <h:form>
+                   <h:dataTable value="#{clientesmb.clientList}" var="c"
+                                styleClass="table table-striped table-sm"
+                                headerClass="thead-dark">
+                       <!-- column header --> <!-- row record -->
+                       <h:column><f:facet name="header"></f:facet>
+                           <h:commandButton action="#{facturasmb.selectClient(c)}" 
+                               class="close" styleClass="btn btn-sm btn-outline-secondary"
+                               value="opc" />
+                       </h:column>
+                       <h:column><f:facet name="header">Id Cliente</f:facet>#{c.idCliente}</h:column>
+                       <h:column><f:facet name="header">Nombres</f:facet>#{c.nombre}</h:column>
+                       <h:column><f:facet name="header">Primer Apellido</f:facet>#{c.apellido1}</h:column>
+                       <h:column><f:facet name="header">Segundo Apellido</f:facet>#{c.apellido2}</h:column>
+                       <h:column><f:facet name="header">Observaciones</f:facet>#{c.observaciones}</h:column>
+                   </h:dataTable>
+                   </h:form>
+               </div>
+           </div>
+       </div>
+   </div>
+</div>

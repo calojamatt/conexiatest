@@ -1,0 +1,254 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:pf="http://primefaces.org/ui">
+    <ui:composition template="../templates/template.xhtml">
+        <ui:define name="content">
+            <!-- modal client -->
+            <div class="modal fade" tabindex="-1" role="dialog"
+                 aria-labelledby="modalCliente" aria-hidden="true" 
+                 id="modalCliente">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalClienteTitle">Lista Clientes</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="col-12 mt-3">
+                                <h:form id="formCliente">
+                                <h:dataTable value="#{clientesmb.clientList}" var="c"
+                                             styleClass="table table-striped table-sm"
+                                             headerClass="thead-dark">
+                                    <!-- column header --> <!-- row record -->
+                                    <h:column><f:facet name="header">sel</f:facet>
+                                        <pf:commandButton update=":factura:inputIdCliente" action="#{facturasmb.selectClient(c)}" 
+                                            styleClass="btn btn-sm btn-outline-secondary" p:data-dismiss="modal" p:aria-label="Close"
+                                            value="opc">
+                                        </pf:commandButton>
+                                    </h:column>
+                                    <h:column><f:facet name="header">Id Cliente</f:facet>#{c.idCliente}</h:column>
+                                    <h:column><f:facet name="header">Nombres</f:facet>#{c.nombre}</h:column>
+                                    <h:column><f:facet name="header">Primer Apellido</f:facet>#{c.apellido1}</h:column>
+                                    <h:column><f:facet name="header">Segundo Apellido</f:facet>#{c.apellido2}</h:column>
+                                    <h:column><f:facet name="header">Observaciones</f:facet>#{c.observaciones}</h:column>
+                                </h:dataTable>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- modal camareros -->
+            <div class="modal fade" tabindex="-1" role="dialog" 
+                 aria-labelledby="modalCamarero" aria-hidden="true" 
+                 id="modalCamarero">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalCamareroTitle">Lista Camareros</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="col-12 mt-3">
+                                <h:form>
+                                <h:dataTable value="#{camareromb.camareroList}" var="c"
+                                             styleClass="table table-striped table-sm"
+                                             headerClass="thead-dark">
+                                    <!-- column header --> <!-- row record -->
+                                    <h:column><f:facet name="header">sel</f:facet>
+                                        <pf:commandButton update=":factura:inputNombreCamarero" action="#{facturasmb.selectCamarero(c)}" 
+                                            styleClass="btn btn-sm btn-outline-secondary" p:data-dismiss="modal" p:aria-label="Close"
+                                            value="opc">
+                                        </pf:commandButton>
+                                    </h:column>
+                                    <h:column><f:facet name="header">Id Camarero</f:facet>#{c.idCamarero}</h:column>
+                                    <h:column><f:facet name="header">Nombres</f:facet>#{c.nombre}</h:column>
+                                    <h:column><f:facet name="header">Primer Apellido</f:facet>#{c.apellido1}</h:column>
+                                    <h:column><f:facet name="header">Segundo Apellido</f:facet>#{c.apellido2}</h:column>
+                                </h:dataTable>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- modal mesas -->
+            <div class="modal fade" tabindex="-1" role="dialog" 
+                 aria-labelledby="modalMesas" aria-hidden="true" 
+                 id="modalMesas">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalMesasTitle">Lista Mesas</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="col-12 mt-3">
+                                <h:form>
+                                    <h:dataTable value="#{mesamb.mesaList}" var="c"
+                                             styleClass="table table-striped table-sm"
+                                             headerClass="thead-dark">
+                                    <!-- column header --> <!-- row record -->
+                                    <h:column><f:facet name="header">sel</f:facet>
+                                        <pf:commandButton update=":factura:inputMesa" action="#{facturasmb.selectMesa(c)}" 
+                                            styleClass="btn btn-sm btn-outline-secondary" p:data-dismiss="modal" p:aria-label="Close"
+                                            value="opc">
+                                        </pf:commandButton>
+                                    </h:column>
+                                    <h:column><f:facet name="header">Id Mesa</f:facet>#{c.idMesa}</h:column>
+                                    <h:column><f:facet name="header">Num Max Comensales</f:facet>#{c.numMaxComensales}</h:column>
+                                    <h:column><f:facet name="header">Ubicacion</f:facet>#{c.ubicacion}</h:column>
+                                </h:dataTable>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- modal platos -->
+            <div class="modal fade" tabindex="-1" role="dialog" 
+                 aria-labelledby="modalPlato" aria-hidden="true" 
+                 id="modalPlato">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalPlatoTitle">Lista Platos</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="col-12 mt-3">
+                                <h:form>
+                                    <h:dataTable value="#{platomb.platoList}" var="c"
+                                             styleClass="table table-striped table-sm"
+                                             headerClass="thead-dark">
+                                    <!-- column header --> <!-- row record -->
+                                    <h:column><f:facet name="header">sel</f:facet>
+                                        <pf:commandButton update=":factura:platoDatatable" action="#{facturasmb.selectPlato(c)}" 
+                                            styleClass="btn btn-sm btn-outline-secondary" p:data-dismiss="modal" p:aria-label="Close"
+                                            value="opc">
+                                        </pf:commandButton>
+                                    </h:column>
+                                    <h:column><f:facet name="header">Id Plato</f:facet>#{c.idPlato}</h:column>
+                                    <h:column><f:facet name="header">Descripcion</f:facet>#{c.nombre}</h:column>
+                                    <h:column><f:facet name="header">Importe</f:facet>#{c.importe}</h:column>
+                                </h:dataTable>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 mt-3">
+                <h4> Registro de Facturacion</h4>
+            </div>
+            <div class="col-12 mt-3">
+                <div class="card">
+                    <div class="card-header"><i class="fas fa-user-plus"></i> Nueva Factura</div>
+                    <div class="card-body">
+                        <!-- Create -->
+                        <div class="col-12">
+                            <h:form id="factura">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="form-row">
+                                            <div class="form-group col-2">
+                                                <label for="inputIdFactura">Id Factura</label>
+                                                <h:inputText value="#{facturasmb.idFactura}" class="form-control col-md-6" id="inputIdFactura" />
+                                            </div>
+                                            <div class="form-group col-3">
+                                                <label for="inputFechaFactura">FechaFactura</label>
+                                                <div class="input-group">
+                                                    <h:inputText p:placeholder="yyyy-mm-dd" value="#{facturasmb.fechaFactura}" class="form-control col-md-6" id="inputFechaFactura">
+                                                        <f:convertDateTime pattern="yyyy-MM-dd"/>  
+                                                    </h:inputText>
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text"><i class="fas fa-calendar-alt"></i></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-8">
+                                                    <label for="inputMesa">Mesa</label>
+                                                    <h:inputText value="#{facturasmb.mesa.idMesa}" class="form-control" id="inputMesa" />
+                                                </div>
+                                                <div class="col-auto mt-4 pt-2">
+                                                    <button type="button" class="btn btn-outline-info mb-2" data-toggle="modal" 
+                                                        data-target="#modalMesas"><i class="fas fa-search"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row align-items-center">
+                                            <div class="col-md-6">
+                                                <label for="inputIdCliente">Cliente</label>
+                                                <h:inputText value="#{facturasmb.nombreCompletoCliente}" class="form-control" id="inputIdCliente" />
+                                            </div>
+                                            <div class="col-auto mt-4 pt-3">
+                                                <button type="button" class="btn btn-outline-info mb-2" data-toggle="modal" 
+                                                        data-target="#modalCliente"><i class="fas fa-search"></i></button>
+                                                <button type="button" class="btn btn-outline-info mb-2"><i class="fas fa-plus"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="form-row align-items-center">
+                                            <div class="col-md-6">
+                                                <label for="inputNombreCamarero">Camarero</label>
+                                                <h:inputText value="#{facturasmb.nombreCompletoCamarero}" class="form-control" id="inputNombreCamarero" />
+                                            </div>
+                                            <div class="col-auto mt-4 pt-3">
+                                                <button type="button" class="btn btn-outline-info mb-2" data-toggle="modal" 
+                                                        data-target="#modalCamarero"><i class="fas fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="mb-3">
+                                            <button type="button" class="btn btn-primary btn-sm" 
+                                                    data-toggle="modal" data-target="#modalPlato">
+                                                <i class="fas fa-plus-circle"></i> Agregar Plato</button>
+                                        </div>
+                                        <div class="col-12 mt-3">
+                                            <h:dataTable value="#{facturasmb.detfacList}" var="c"
+                                                    styleClass="table table-striped table-sm"
+                                                    headerClass="thead-dark" id="platoDatatable">
+                                                <!-- column header --> <!-- row record -->
+                                                <h:column><f:facet name="header">###</f:facet>
+                                                    <pf:commandButton update=":factura:platoDatatable" action="#{facturasmb.deletePlato(c)}" 
+                                                        styleClass="btn btn-sm btn-outline-secondary" p:data-dismiss="modal" p:aria-label="Close"
+                                                        icon="pi pi-times-circle">
+                                                    </pf:commandButton>
+                                                </h:column>
+                                                <h:column><f:facet name="header">Id Plato</f:facet>#{c.idPlato.idPlato}</h:column>
+                                                <h:column><f:facet name="header">Nombres</f:facet>#{c.idPlato.nombre}</h:column>
+                                                <h:column><f:facet name="header">Importe</f:facet>#{c.importe}</h:column>
+                                            </h:dataTable>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <h:commandButton action="#{facturasmb.createInvoice()}" class="btn btn-primary" value="Registrar"></h:commandButton>
+                                    </div>
+                                </div>
+                            </h:form>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <h:link outcome="facturas" class="btn btn-info btn-sm" value="Lista Facturas"></h:link>
+                    </div>
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>
