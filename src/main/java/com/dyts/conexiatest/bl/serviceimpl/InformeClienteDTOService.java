@@ -47,7 +47,7 @@ public class InformeClienteDTOService implements IInformeClienteDTOService<Infor
                 " LEFT JOIN detallefactura d ON (f.idFactura = d.idFactura) "+
                 " GROUP BY c.nombre, c.Apellido1, c.Apellido2 "+
                 ") ClienteFacturacion "+
-                "WHERE totalFactuado = :totalFacurado";
+                "WHERE totalFactuado >= :totalFacurado";
         Query query = entityManager.createNativeQuery(queryStatement);
         query.setParameter("totalFacurado", valor);
         List result = query.getResultList();

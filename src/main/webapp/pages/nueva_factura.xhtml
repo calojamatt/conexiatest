@@ -166,7 +166,7 @@
                                         <div class="form-row">
                                             <div class="form-group col-2">
                                                 <label for="inputIdFactura">Id Factura</label>
-                                                <h:inputText value="#{facturasmb.idFactura}" class="form-control col-md-6" id="inputIdFactura" />
+                                                <h:inputText value="#{facturasmb.idFactura}" class="form-control col-md-6" id="inputIdFactura" disabled="true"/>
                                             </div>
                                             <div class="form-group col-3">
                                                 <label for="inputFechaFactura">FechaFactura</label>
@@ -226,9 +226,8 @@
                                                     headerClass="thead-dark" id="platoDatatable">
                                                 <!-- column header --> <!-- row record -->
                                                 <h:column><f:facet name="header">###</f:facet>
-                                                    <pf:commandButton update=":factura:platoDatatable" action="#{facturasmb.deletePlato(c)}" 
-                                                        styleClass="btn btn-sm btn-outline-secondary" p:data-dismiss="modal" p:aria-label="Close"
-                                                        icon="pi pi-times-circle">
+                                                    <pf:commandButton update=":factura" action="#{facturasmb.deletePlato(c)}"
+                                                        styleClass="btn btn-sm btn-outline-secondary" icon="pi pi-times-circle">
                                                     </pf:commandButton>
                                                 </h:column>
                                                 <h:column><f:facet name="header">Id Plato</f:facet>#{c.idPlato.idPlato}</h:column>
