@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                http://www.springframework.org/schema/beans/spring-beans.xsd
+                http://www.springframework.org/schema/context
+                http://www.springframework.org/schema/context/spring-context.xsd
+                http://www.springframework.org/schema/tx
+                http://www.springframework.org/schema/tx/spring-tx.xsd
+                http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    
+    <!-- Spring Application Context -->
+    <!--<bean id="applicationContextUtils" class="com.dyts.conexiatest.ApplicationContextUtils" />-->
+    <!-- Data Source Declaration dbcp -->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://localhost:3306/conexiatest" />
+        <property name="username" value="conexiauser" />
+        <property name="password" value="C0nex1aT3st" />
+    </bean>
+
+    <!-- Session Factory Declaration -->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <!-- load hibernate configuration file -->
+        <!--<property name="configLocation" value="WEB-INF/hibernate.cfg.xml" />-->
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.format_sql">false</prop>
+            </props>
+        </property>
+        <property name="packagesToScan" value="com.dyts.conexiatest.persistence.entities"/>
+    </bean>
+
+    <!-- Transaction Manager is defined -->
+    <bean id="txManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+
+    <!-- Enable autowire -->
+    <context:annotation-config />
+    <context:spring-configured />
+    <!-- Scans the classpath of this application for @entities and @components to deploy as beans -->
+    <context:component-scan base-package="com.dyts.conexiatest" />
+
+    <!-- Enable the configuration of transactional behavior based on annotations -->
+    <!-- when bean id is transactionManager the transaction-manager can omit -->
+    <tx:annotation-driven transaction-manager="txManager" proxy-target-class="true" />
+    <mvc:resources mapping="/web-resources/**/" location="resources" />
+
+    <!-- Spring Repositories. -->
+    <bean id="genericDao" class="com.dyts.conexiatest.persistence.dao.GenericDao">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+
+    <!--<bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor" />-->
+    <bean class="com.dyts.conexiatest.bl.serviceimpl.ClienteService" id="clienteService">
+        <property name="genericDao" ref="genericDao"/>
+    </bean>
+    <bean class="com.dyts.conexiatest.bl.serviceimpl.CamareroService" id="camareroService">
+        <property name="genericDao" ref="genericDao"/>
+    </bean>
+    <bean class="com.dyts.conexiatest.bl.serviceimpl.CocineroService" id="cocineroService">
+        <property name="genericDao" ref="genericDao"/>
+    </bean>
+    <bean class="com.dyts.conexiatest.bl.serviceimpl.MesaService" id="mesaService">
+        <property name="genericDao" ref="genericDao"/>
+    </bean>
+    <bean class="com.dyts.conexiatest.bl.serviceimpl.PlatoService" id="platoService">
+        <property name="genericDao" ref="genericDao"/>
+    </bean>
+    <bean class="com.dyts.conexiatest.bl.serviceimpl.FacturaService" id="facturaService">
+        <property name="genericDao" ref="genericDao"/>
+    </bean>
+    <bean class="com.dyts.conexiatest.bl.serviceimpl.DetallefacturaService" id="detallefacturaService">
+        <property name="genericDao" ref="genericDao"/>
+    </bean>
+    <bean class="com.dyts.conexiatest.bl.serviceimpl.InformeCamareroDTOService" id="informeCamareroDTOService">
+        <property name="genericDao" ref="genericDao"/>
+    </bean>
+    <bean class="com.dyts.conexiatest.bl.serviceimpl.InformeClienteDTOService" id="informeClienteDTOService">
+        <property name="genericDao" ref="genericDao"/>
+    </bean>
+
+</beans>

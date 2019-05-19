@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pf="http://primefaces.org/ui"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+    <ui:composition template="../templates/template.xhtml">
+        <ui:define name="content">
+            <!-- modal cocineros -->
+            <div class="modal fade" tabindex="-1" role="dialog"
+                 aria-labelledby="modalCocineros" aria-hidden="true"
+                 id="modalCocineros">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalCocineroTitle">Lista Cocineros</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="col-12 mt-3">
+                                <h:form>
+                                    <h:dataTable value="#{cocineromb.cocineroList}" var="coc"
+                                                 styleClass="table table-striped table-sm"
+                                                 headerClass="thead-dark" id="cocineroDataTable">
+                                        <!-- column header --> <!-- row record -->
+                                        <h:column><f:facet name="header">sel</f:facet>
+                                            <pf:commandButton update=":cocinero:inputCocineto" action="#{platomb.selectCocinero(coc)}"
+                                                              styleClass="btn btn-sm btn-outline-secondary" p:data-dismiss="modal" p:aria-label="Close"
+                                                              value="opc">
+                                            </pf:commandButton>
+                                        </h:column>
+                                        <h:column headerText="ID Cocinero"><f:facet name="header">Id Cocinero</f:facet>#{coc.idCocinero}</h:column>
+                                        <h:column headerText="Nombres"><f:facet name="header">Nombres</f:facet>#{coc.nombre}</h:column>
+                                        <h:column headerText="Pimer Apellido"><f:facet name="header">Primer Apellido</f:facet>#{coc.apellido1}</h:column>
+                                        <h:column headerText="Segundo Apellido"><f:facet name="header">Segundo Apellido</f:facet>#{coc.apellido2}</h:column>
+                                    </h:dataTable>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 mt-3">
+                <h4> Gestion de Platos</h4>
+            </div>
+            <div class="col-12 mt-3">
+                <div class="card">
+                    <div class="card-header"><i class="fas fa-user-plus"></i> Lista de Platos</div>
+                    <div class="card-body">
+                        <!-- Create -->
+                        <div class="col-12">
+                            <h:form id="cocinero">
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="inputIdCliente">Id Plato</label>
+                                        <h:inputText value="#{platomb.idPlato}" class="form-control" id="inputIdCliente" disabled="true"/>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="inputNombres">Descripcion</label>
+                                        <h:inputText value="#{platomb.nombre}" class="form-control" id="inputNombres" />
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                        <label for="inputApellido1">Importe</label>
+                                        <h:inputText value="#{platomb.importe}" class="form-control" id="inputApellido1" />
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="inputCocineto">Cocinero</label>
+                                        <h:inputText value="#{platomb.nombreCocinero}" class="form-control" id="inputCocineto" />
+                                    </div>
+                                    <div class="col-auto mt-4 pt-2">
+                                        <button type="button" class="btn btn-outline-info mb-2" data-toggle="modal"
+                                                data-target="#modalCocineros"><i class="fas fa-search"></i></button>
+                                    </div>
+                                </div>
+                                <h:commandButton action="#{platomb.createPlato()}" class="btn btn-primary" value="Registrar"></h:commandButton>
+                            </h:form>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <h:link outcome="platos" class="btn btn-info btn-sm" value="Listar Plato"></h:link>
+                    </div>
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>

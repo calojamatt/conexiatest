@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="../templates/template.xhtml">
+        <ui:define name="content">
+            <div class="col-12 mt-3">
+                <h4> Camareros</h4>
+            </div>
+            <div class="col-12 mt-3">
+                <div class="card">
+                    <div class="card-header"><i class="fas fa-user-plus"></i> Crear Camarero</div>
+                    <div class="card-body">
+                        <!-- Create -->
+                        <div class="col-12">
+                            <h:form>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="inputIdCliente">Id Camarero</label>
+                                        <h:inputText value="#{camareromb.idCamarero}" class="form-control" id="inputIdCliente" />
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="inputNombres">Nombre Camarero</label>
+                                        <h:inputText value="#{camareromb.nombres}" class="form-control" id="inputNombres" />
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="inputApellido1">Primer Apellido</label>
+                                        <h:inputText value="#{camareromb.apellido1}" class="form-control" id="inputApellido1" />
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="inputApellido2">Segundo Apellido</label>
+                                        <h:inputText value="#{camareromb.apellido2}" class="form-control" id="inputApellido2" />
+                                    </div>
+                                </div>
+                                <h:commandButton action="#{camareromb.createCamarero()}" class="btn btn-primary" value="Registrar"></h:commandButton>
+                            </h:form>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <h:link outcome="camareros" class="btn btn-info btn-sm" value="Listar Camarero"></h:link>
+                    </div>
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>
