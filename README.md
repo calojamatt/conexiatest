@@ -17,4 +17,4 @@ After download source code, you must execute the scrips in the folder [script] t
 The application runs over Wildfly, it does not need an especific datasource to run. The configuration to the database is in the file applicationContext.xml
 
 ## License
-[GPLv3](https://www.gnu.org/licenses/gpl-3.0.html)
+[Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0)
